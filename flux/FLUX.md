@@ -1,4 +1,4 @@
-# Flux Installation on Perlmutter: User Notes
+# Flux Installation on Perlmutter: User Notes Courtesy of Nathan Keilbart.
 
 1. Get the Spack installation manager
 * Once you have it running, you might need to run
@@ -16,7 +16,7 @@
 * This will get you two nodes with GPUs but if you don’t want GPUs you
   can drop the commands at the end.
 4. Start a Flux manager
-* You’ll need to create a script that will call flux from your spack
+* You’ll need to create a script that will call flux from your Spack
   environment. I initially had problems because it was overwriting
   environment files that were needed. I called mine `start_flux.sh`:
   ```bash
