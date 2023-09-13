@@ -32,3 +32,16 @@
 * `flux submit -N 1 -n 1 <binary>`
 * `flux resource list`, will show available resources
 * `flux jobs`, show all currently submitted jobs.
+
+## UPDATE: 9/12/23 - Erik Palmer
+
+Steps to run:
+
+1. `module load cpu spack`
+2. `spack install flux-sched`
+3. `spack install hwloc+cuda+pci+nvml cuda_arch=80`
+3. `salloc -C gpu -A <account> -N 2 --gpus-per-node 4 -q debug -t 30`
+4. `spack load flux-sched`
+5. `flux start -s1`
+6. `flux resource list`
+7. `flux mini submit -N 1 -n 1 <binary>`
