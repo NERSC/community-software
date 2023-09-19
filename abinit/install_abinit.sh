@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -e 
+set -e
 
 target=${target:=cpu}
 prgenv=${prgenv:=gnu}
@@ -12,7 +12,7 @@ prefix_root=${prefix_root:=$SCRATCH/testing}
 
 prefix=$prefix_root/$name/$version/$prgenv
 
-if [ -d "$prefix" ]; then 
+if [ -d "$prefix" ]; then
     echo "Prefix directory exists. Please verify install location."
     exit 1
 fi
@@ -32,14 +32,14 @@ module load cray-netcdf
 
 
 # temporary until libxc module is formalized
-module use /pscratch/sd/e/epalmer/LIBXC/modulefile
+module use module use /global/common/software/nersc/user/tmp_modulefile
 module load libxc/4.3.4
 
 
 build_dir=$prefix/build
 mkdir -p $build_dir
 
-cd $build_dir 
+cd $build_dir
 tar xvf $prefix/tmp/$filename
 cd $name-$version
 
@@ -55,7 +55,7 @@ module list
     --with-hdf5=$HDF5_ROOT \
     --with-netcdf=$NETCDF_DIR \
     --with-netcdf-fortran=$(nf-config --prefix) \
-    --with-libxc=$LIBXC_ROOT 
+    --with-libxc=$LIBXC_ROOT
 
 make -j8
 
