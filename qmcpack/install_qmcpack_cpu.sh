@@ -13,13 +13,13 @@ prefix_root=${prefix_root:=$SCRATCH/testing}
 
 prefix=$prefix_root/$name/$version/$prgenv
 
-if [ -d "$prefix" ]; then
-    echo "Prefix directory exists. Please verify install location."
-    exit 1
-fi
+#if [ -d "$prefix" ]; then
+#    echo "Prefix directory exists. Please verify install location."
+#    exit 1
+#fi
+#mkdir -p $prefix
 
 # Get source from GitHub
-
 if ! [ -e $prefix/qmcpack ]; then
     cd $prefix
     git clone https://github.com/QMCPACK/qmcpack.git
@@ -29,21 +29,22 @@ cd $prefix/qmcpack
 git checkout v${version}
 
 
-module load PrgEnv-$gnu
+module load PrgEnv-$prgenv
 module load cray-fftw
 module load cray-hdf5-parallel
 module load cmake/3.24.3 #<--because default is old
 
+pwd
+ls
 
-
-
-build_dir=$prefix/build_$target
+build_dir=$prefix/qmcpack/build_$target
 mkdir -p $build_dir
 cd $build_dir
 
 module list
+pwd
 
-camke .. -DCMAKE_SYSTEM_NAME=CrayLinuxEnvironment \
+cmake .. -DCMAKE_SYSTEM_NAME=CrayLinuxEnvironment \
     -DCMAKE_INSTALL_PREFIX=$(pwd)/install \
     -DQMC_COMPLEX=ON \
     -DQMC_MIXED_PRECISION=ON \
