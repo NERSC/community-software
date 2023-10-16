@@ -45,8 +45,12 @@ cd $name-$version
 
 module list
 
+# --with-linalg="" prevents build from adding `-llapack` which picks up an old
+# version of libfortran that is incompatible
+
 ./configure --prefix=$prefix \
     CC="cc" CXX="CC" FC="ftn" \
+    HAVE_LINALG_SCALAPACK=1 \
     FCFLAGS="-fallow-argument-mismatch -ffree-line-length-none" \
     --with-mpi \
     --with-mpi-flavor="native" \
@@ -55,6 +59,7 @@ module list
     --with-hdf5=$HDF5_ROOT \
     --with-netcdf=$NETCDF_DIR \
     --with-netcdf-fortran=$(nf-config --prefix) \
+    --with-linalg=" " \
     --with-libxc=$LIBXC_ROOT
 
 make -j8
