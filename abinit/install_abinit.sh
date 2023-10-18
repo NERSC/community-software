@@ -50,7 +50,6 @@ module list
 
 ./configure --prefix=$prefix \
     CC="cc" CXX="CC" FC="ftn" \
-    HAVE_LINALG_SCALAPACK=1 \
     FCFLAGS="-fallow-argument-mismatch -ffree-line-length-none" \
     --with-mpi \
     --with-mpi-flavor="native" \
