@@ -1,10 +1,12 @@
 # GPAW install and test directions
 
+Installing GPAW requires a `siteconfig.py` file tailored to Perlmutter.
+This file must be present in the same directory where `setup.py` is run.
+The directions below will use the `siteconfig.py` file stored in this
+repository. After downloading the file it you may customize it to your
+application.
 
-First you'll need to create a `siteconfig.py` file tailored for Perlmutter.
-
-
-Then run the following commands:
+To install run the following commands:
 
 ```
 module load python cray-fftw
@@ -15,6 +17,7 @@ source activate gpaw
 pip install ase
 git clone -b 23.9.1 https://gitlab.com/gpaw/gpaw.git
 cd gpaw
+wget https://raw.githubusercontent.com/NERSC/community-software/main/gpaw/siteconfig.py -O siteconfig.py
 python setup.py build_ext
 python setup.py install
 ```
