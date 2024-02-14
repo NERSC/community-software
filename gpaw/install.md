@@ -1,5 +1,12 @@
 # GPAW install and test directions
 
+##Prerequisite
+
+This version of GPAW depends on libxc ver. 6.2.2. First install libxc
+and then edit the `siteconfig.py` to point to location of the install.
+
+##Install
+
 Installing GPAW requires a `siteconfig.py` file tailored to Perlmutter.
 This file must be present in the same directory where `setup.py` is run.
 The directions below will use the `siteconfig.py` file stored in this
@@ -10,8 +17,6 @@ To install run the following commands:
 
 ```
 module load python cray-fftw
-module use /global/common/software/nersc/user/tmp_modulefile
-module load libxc/6.2.2
 conda create --name gpaw pip numpy scipy matplotlib
 source activate gpaw
 pip install ase

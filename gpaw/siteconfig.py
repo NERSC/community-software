@@ -71,9 +71,9 @@ if 0:
 #        libraries.remove('xc')
 
 # - dynamic linking (requires rpath or setting LD_LIBRARY_PATH at runtime):
-# Uses a temporary install of libxc
 if 1:
-    xc = '/global/common/software/nersc/user/libxc/6.2.2'
+    # Edit this line to point to the location of your libxc install
+    xc = '/your/path/to/libxc/6.2.2'
     include_dirs += [xc + 'include']
     library_dirs += [xc + 'lib']
     # You can use rpath to avoid changing LD_LIBRARY_PATH:
