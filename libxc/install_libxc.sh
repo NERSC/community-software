@@ -3,7 +3,7 @@
 set -e 
 
 name=libxc
-version=${version:=4.3.4}
+version=${version:=6.2.2}
 prgenv=${prgenv:=gnu}
 target=${target:=cpu}
 
@@ -37,7 +37,7 @@ cd $name-$version
 
 module list
 
-./configure --prefix=$prefix CC="cc" CXX="CC" FC="ftn"
+./configure --prefix=$prefix CC="cc" CXX="CC" FC="ftn" CFLAGS="-fPIC"
 
 make -j8
 
