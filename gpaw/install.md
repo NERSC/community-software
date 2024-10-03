@@ -29,7 +29,21 @@ python setup.py install
 
 *NOTE: This will install GPAW ver. 23.9.1.*
 
+*NOTE: If there is an error as follows* when running `python setup.py build_ext`:
+```
+c/lfc.c: In function ‘construct_density’:
+c/lfc.c:526:78: error: ‘PyArray_Descr’ {aka ‘struct _PyArray_Descr’} has no member named ‘elsize’
+  526 |     if (!(PyArray_DESCR(rho_MM_obj)->kind == 'f' && PyArray_DESCR(rho_MM_obj)->elsize == 8))
+      |                                                                              ^~
+c/lfc.c:581:78: error: ‘PyArray_Descr’ {aka ‘struct _PyArray_Descr’} has no member named ‘elsize’
+  581 |     if (!(PyArray_DESCR(rho_MM_obj)->kind == 'c' && PyArray_DESCR(rho_MM_obj)->elsize == 16))
+      |                                                                              ^~
+error: command '/opt/cray/pe/craype/2.7.30/bin/cc' failed with exit code 1,
+```
+the solution is to remove all `->elsize` in *`GPAW_PATH/c/lfc.c`*
 
+
+## Run
 To run, you'll first need to request an interactive session with the `salloc`
 command (see https://docs.nersc.gov/jobs/interactive/#interactive-jobs). Once your
 session begins, try the commands:
