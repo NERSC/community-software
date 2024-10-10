@@ -29,7 +29,7 @@ python setup.py install
 
 *NOTE: This will install GPAW ver. 23.9.1.*
 
-*NOTE: If there is an error as follows* when running `python setup.py build_ext`:
+*NOTE: There is an error that stems from an incompatiblity with numpy version 2.0 and greater* when running `python setup.py build_ext`:
 ```
 c/lfc.c: In function ‘construct_density’:
 c/lfc.c:526:78: error: ‘PyArray_Descr’ {aka ‘struct _PyArray_Descr’} has no member named ‘elsize’
@@ -40,7 +40,9 @@ c/lfc.c:581:78: error: ‘PyArray_Descr’ {aka ‘struct _PyArray_Descr’} has
       |                                                                              ^~
 error: command '/opt/cray/pe/craype/2.7.30/bin/cc' failed with exit code 1,
 ```
-the solution is to remove all `->elsize` in *`GPAW_PATH/c/lfc.c`*
+the solution is to replace all `PyArray_DESCR(rho_MM_obj)->elsize` with `PyArray_ITEMSIZE(rho_MM_obj)` in *`GPAW_PATH/c/lfc.c`*
+
+See the [NumPy Docs](https://numpy.org/devdocs/numpy_2_0_migration_guide.html#the-pyarray-descr-struct-has-been-changed) for additional details.
 
 
 ## Run
