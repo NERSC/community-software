@@ -22,7 +22,8 @@ filename=$name-$version.tar.gz
 
 if ! [ -e $prefix/tmp/$filename ]; then
     mkdir -p $prefix/tmp
-    url=http://www.tddft.org/programs/libxc/down.php?file=$version/libxc-$version.tar.gz
+    # url=http://www.tddft.org/programs/libxc/down.php?file=$version/libxc-$version.tar.gz # not working now
+    url=https://gitlab.com/libxc/libxc/-/archive/$version/libxc-$version.tar.bz2
     wget $url -O $prefix/tmp/$filename
 fi
 
@@ -37,7 +38,8 @@ cd $name-$version
 
 module list
 
-./configure --prefix=$prefix CC="cc" CXX="CC" FC="ftn" CFLAGS="-fPIC"
+autoreconf -i
+./configure --build=$(gcc -dumpmachine) --prefix=$prefix CC="cc" CXX="CC" FC="ftn" CFLAGS="-fPIC"
 
 make -j8
 
